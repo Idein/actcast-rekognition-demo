@@ -1,0 +1,75 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  actcast-rekognition-demo
+
+  Sample SAM Template for actcast-rekognition-demo
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+        Timeout: 10
+
+Parameters:
+  RekoginitionCollectionId:
+    Default: actcast_detected
+    Description: The collection  admin account password
+    Type : String
+
+
+Resources:
+
+  # Lambda main
+  RekognitionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: func/
+      Handler: app.handler
+      Runtime: python3.6
+      Policies:
+        - AmazonRekognitionFullAccess
+        - DynamoDBCrudPolicy:
+            TableName: !Ref RekognizedTable
+        - S3CrudPolicy:
+            BucketName: !Ref RekognizedBucket
+      Environment:
+        Variables:
+          PYTHONPATH: /var/runtime:/var/task/site-packages
+          TABLE_NAME: !Ref RekognizedTable
+          BUCKET_NAME: !Ref RekognizedBucket
+          COLLECTION_ID: !Ref RekoginitionCollectionId
+      Events:
+        FaceLog:
+          Type: Api
+          Properties:
+            Path: /face
+            Method: post
+
+  # DynamoDB
+  RekognizedTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: RekognitionId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: RekognitionId
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+  # S3 bucket contains static contents
+  RekognizedBucket:
+    Type: AWS::S3::Bucket
+
+
+Outputs:
+
+  RekognitionApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/face/"
+
+  RekognitionFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt RekognitionFunction.Arn

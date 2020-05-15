@@ -8,9 +8,9 @@ Therefore, **an edge-cloud hybrid architecture** is required, where the first st
 
 In this sample project, we use Raspberry Pi to detect and track faces on the edge, and calls Rekognition API only when it detects a person's face to turn it into a Face ID.
 
-# actcast-rekognition-demo
+# Setup
 
-This is a sample template for actcast-rekognition-demo - Below is a brief explanation of what we have generated for you:
+Below is a brief explanation of what we have generated for you:
 
 ```bash
 .

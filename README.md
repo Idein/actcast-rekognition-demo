@@ -8,7 +8,7 @@ Therefore, **an edge-cloud hybrid architecture** is required, where the first st
 
 In this sample project, we use Raspberry Pi to detect and track faces on the edge, and calls Rekognition API only when it detects a person's face to turn it into a Face ID.
 
-# Setup Process
+# Setup
 
 1. Setup the AWS side software
 2. Setup Raspberry Pi and face detection app
@@ -28,7 +28,7 @@ Below is a brief explanation of what we have generated for you:
 └── template.yaml               <-- SAM Template
 ```
 
-## Requirements
+### Requirements
 
 * AWS CLI already configured with at least PowerUser permission
 * [Python 3 installed](https://www.python.org/downloads/)

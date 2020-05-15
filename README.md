@@ -45,13 +45,13 @@ Then package the software and deploy them.
 ```
 aws s3 mb s3://your-source-bucket-name
 sam package --output-template-file packaged.yaml --s3-bucket your-source-bucket-name
-sam deploy --template-file packaged.yaml --stack-name actcast-rekognition-demo  --capabilities CAPABILITY_IAM
+sam deploy --template-file packaged.yaml --stack-name your-stack-name  --capabilities CAPABILITY_IAM
 ```
 
 After the deployment is sucessfully completed, run the following command to check the API endpoint and other resources.
 
 ```
-aws cloudformation describe-stacks --stack-name actcast-rekognition-demo --query 'Stacks[].Outputs'
+aws cloudformation describe-stacks --stack-name your-stack-name --query 'Stacks[].Outputs'
 ```
 
 ## Setup Raspberry Pi and face detection app

@@ -43,8 +43,8 @@ aws rekognition create-collection --collection-id YOUR_COLLECTION_ID
 Then package the software and deploy them.
 
 ```
-aws s3 mb s3://YOUR_SOURCE_BUCKET_NAME
-sam package --output-template-file packaged.yaml --s3-bucket YOUR_SOURCE_BUCKET_NAME
+aws s3 mb s3://your-source-bucket-name
+sam package --output-template-file packaged.yaml --s3-bucket your-source-bucket-name
 sam deploy --template-file packaged.yaml --stack-name actcast-rekognition-demo  --capabilities CAPABILITY_IAM
 ```
 

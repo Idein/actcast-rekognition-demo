@@ -40,7 +40,7 @@ def increment_index_count(faceId):
     table = dynamodb.Table(TABLE_NAME)
     response = table.get_item(Key={'RekognitionId': faceId}, )
     item = response['Item'] if 'Item' in response else {}
-    if not "Count" in item: item["Count"] = 0
+    if "Count" not in item: item["Count"] = 0
     item["Count"] += 1
     table.put_item(
         TableName=TABLE_NAME,

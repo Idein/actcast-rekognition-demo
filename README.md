@@ -8,7 +8,13 @@ Therefore, **an edge-cloud hybrid architecture** is required, where the first st
 
 In this sample project, we use Raspberry Pi to detect and track faces on the edge, and calls Rekognition API only when it detects a person's face to turn it into a Face ID.
 
-# Setup
+# Setup Process
+
+1. Setup the AWS side software
+2. Setup Raspberry Pi and face detection app
+3. Connect them using Actcastg's Cast function
+
+## Setup the AWS side software
 
 Below is a brief explanation of what we have generated for you:
 
@@ -29,17 +35,17 @@ Below is a brief explanation of what we have generated for you:
 * [Docker installed](https://www.docker.com/community-edition)
 * [Python Virtual Environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
 
-## Setup process
+### Setup process
 
 
-### Create collection
+#### Create collection
 
 ```
 aws rekognition create-collection --collection-id YOUR_COLLECTION_ID
 ```
 
 
-### Create Source bucket
+#### Create Source bucket
 
 AWS CLI commands to package, deploy and describe outputs defined within the cloudformation stack:
 
@@ -48,28 +54,42 @@ aws s3 mb s3://YOUR_SOURCE_BUCKET_NAME
 
 ```
 
-### Package
+#### Package
 
 ```bash
 sam package --output-template-file packaged.yaml --s3-bucket YOUR_SOURCE_BUCKET_NAME
 ```
 
-### Deploy
+#### Deploy
 
 ```
 sam deploy --template-file packaged.yaml --stack-name actcast-rekognition-demo  --capabilities CAPABILITY_IAM
 ```
 
 
-### Show Outputs
+#### Show Outputs
 
 ```
 aws cloudformation describe-stacks --stack-name actcast-rekognition-demo --query 'Stacks[].Outputs'
 ```
 
 
-### Show logs
+#### Show logs
 
 ```
 sam logs -n actcast-rekognition-demo-RekognitionFunction-XXXXXXXXXXXXX
+```
+
+## Setup Raspberry Pi and face detection app
+
+Setup a Raspberry Pi following [Actcast's Tutorial](https://actcast.io/docs/) and install **Face Tracking** App.
+
+## Setup Cast
+
+Set webhook endpoint, shown in the output of `describe-stacks` command,  and JSON template to the app's Cast setting like this.
+
+```
+{
+"image": "{{ data.face }}"
+}
 ```

@@ -1,3 +1,13 @@
+# Face Recognition with Actcast and Amazon Rekognition
+
+This is a sample code to build a practical face recognition system combining [Actcast](https://actcast.io) and [Amazon Rekognition](https://aws.amazon.com/rekognition/).
+
+Using Amazon Rekognition's API, you can easily build a face recognition system.
+However, when analyzing real-world images captured by security cameras, etc., it is necessary to process a large number of images captured continuously, which incurs high network traffic costs and API usage fees.
+Therefore, **an edge-cloud hybrid architecture** is required, where the first stage is analyzed on the edge and the second stage only when necessary on the cloud.
+
+In this sample project, we use Raspberry Pi to detect and track faces on the edge, and calls Rekognition API only when it detects a person's face to turn it into a Face ID.
+
 # actcast-rekognition-demo
 
 This is a sample template for actcast-rekognition-demo - Below is a brief explanation of what we have generated for you:

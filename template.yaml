@@ -11,7 +11,7 @@ Globals:
         Timeout: 10
 
 Parameters:
-  RekoginitionCollectionId:
+  RekognitionCollectionId:
     Default: actcast_detected
     Description: The collection  admin account password
     Type : String
@@ -37,7 +37,7 @@ Resources:
           PYTHONPATH: /var/runtime:/var/task/site-packages
           TABLE_NAME: !Ref RekognizedTable
           BUCKET_NAME: !Ref RekognizedBucket
-          COLLECTION_ID: !Ref RekoginitionCollectionId
+          COLLECTION_ID: !Ref RekognitionCollectionId
       Events:
         FaceLog:
           Type: Api

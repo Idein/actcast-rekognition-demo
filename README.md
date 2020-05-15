@@ -30,10 +30,8 @@ Below is a brief explanation of what we have generated for you:
 
 ### Requirements
 
-* AWS CLI already configured with at least PowerUser permission
-* [Python 3 installed](https://www.python.org/downloads/)
-* [Docker installed](https://www.docker.com/community-edition)
-* [Python Virtual Environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+* [AWS CLI](https://aws.amazon.com/cli/) configured with at least PowerUser permission
+* [AWS SAM CLI](https://aws.amazon.com/serverless/sam/)
 
 ### Setup process
 

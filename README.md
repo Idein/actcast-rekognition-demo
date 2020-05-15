@@ -28,54 +28,30 @@ Below is a brief explanation of what we have generated for you:
 └── template.yaml               <-- SAM Template
 ```
 
-### Requirements
+Requirements.
 
 * [AWS CLI](https://aws.amazon.com/cli/) configured with at least PowerUser permission
 * [AWS SAM CLI](https://aws.amazon.com/serverless/sam/)
 
-### Setup process
 
-
-#### Create collection
+First of all, create a collection to store face features.
 
 ```
 aws rekognition create-collection --collection-id YOUR_COLLECTION_ID
 ```
 
-
-#### Create Source bucket
-
-AWS CLI commands to package, deploy and describe outputs defined within the cloudformation stack:
+Then package the software and deploy them.
 
 ```
 aws s3 mb s3://YOUR_SOURCE_BUCKET_NAME
-
-```
-
-#### Package
-
-```bash
 sam package --output-template-file packaged.yaml --s3-bucket YOUR_SOURCE_BUCKET_NAME
-```
-
-#### Deploy
-
-```
 sam deploy --template-file packaged.yaml --stack-name actcast-rekognition-demo  --capabilities CAPABILITY_IAM
 ```
 
-
-#### Show Outputs
+After the deployment is sucessfully completed, run the following command to check the API endpoint and other resources.
 
 ```
 aws cloudformation describe-stacks --stack-name actcast-rekognition-demo --query 'Stacks[].Outputs'
-```
-
-
-#### Show logs
-
-```
-sam logs -n actcast-rekognition-demo-RekognitionFunction-XXXXXXXXXXXXX
 ```
 
 ## Setup Raspberry Pi and face detection app

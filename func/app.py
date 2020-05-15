@@ -27,8 +27,8 @@ def search_faces_by_image(decoded_image):
 
 def index_faces(decoded_image):
     try:
-        response = rekognition.index_faces(
-            Image={'Bytes': decoded_image}, CollectionId=COLLECTION_ID)
+        response = rekognition.index_faces(Image={'Bytes': decoded_image},
+                                           CollectionId=COLLECTION_ID)
     except Exception as e:
         print(e)
         return []
@@ -42,12 +42,11 @@ def increment_index_count(faceId):
     item = response['Item'] if 'Item' in response else {}
     if "Count" not in item: item["Count"] = 0
     item["Count"] += 1
-    table.put_item(
-        TableName=TABLE_NAME,
-        Item={
-            'RekognitionId': faceId,
-            "Count": item["Count"]
-        })
+    table.put_item(TableName=TABLE_NAME,
+                   Item={
+                       'RekognitionId': faceId,
+                       "Count": item["Count"]
+                   })
     return item["Count"]
 
 
